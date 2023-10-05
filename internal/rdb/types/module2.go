@@ -35,6 +35,11 @@ func PareseModuleType(rd io.Reader, key string, typeByte byte) ModuleObject {
 		o.encver = int(moduleId & 1023)
 		o.LoadFromBuffer(rd, key, typeByte)
 		return o
+	case "MBbloomCF":
+		o := new(CuckooObject)
+		o.encver = int(moduleId & 1023)
+		o.LoadFromBuffer(rd, key, typeByte)
+		return o
 	default:
 		log.Panicf("unsupported module type: %s", moduleName)
 		return nil
